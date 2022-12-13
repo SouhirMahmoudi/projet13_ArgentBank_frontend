@@ -79,7 +79,7 @@ const authSlice = createSlice({
  [getProfile.pending]: (state, action) => {
     state.loading = true
 },
-[getProfile.fulfilled]: (state, { payload: { error, firstName,lastName } }) => {
+[getProfile.fulfilled]: (state, { payload: { error, body } }) => {
     state.loading = false;
     if (error) {
         state.error = error;
@@ -87,8 +87,10 @@ const authSlice = createSlice({
 
     }
     else {
-        state.firstName = firstName;
-        state.lastName = lastName;
+        console.log(body)
+        state.firstName = body.firstName;
+        //state.lastName = lastName;
+     
     }
 
 }

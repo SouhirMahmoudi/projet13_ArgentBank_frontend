@@ -2,27 +2,26 @@ import React from "react";
 import store from "../features/Store";
 import { useDispatch } from "react-redux";
 import { getProfile } from "../features/authSlice";
-import { useState } from "react";
+//import { useState } from "react";
 import { useEffect } from "react";
-import { json } from "react-router-dom";
-import { set } from "immer/dist/internal";
+
 
 
 function ProfilePage() {
-  const dispatch = useDispatch();
-  const Jwt = localStorage.getItem("token");
-  const [firstname, setfirstname] = useState("");
+ const dispatch = useDispatch();
+ const Jwt = localStorage.getItem("token");
+ // const [firstname, setfirstname] = useState("");
  // const [lastname, setlastname] = useState("");
 
-  useEffect(() => {
-    dispatch(getProfile({Jwt})).then(data => {
-      setfirstname(data.firstname);
+ useEffect(() => {
+  dispatch(getProfile({Jwt}))
+  
      // setlastname(data.lastname)
-    })
+   },[dispatch, Jwt])
    
-  },[dispatch,Jwt])
+ //   const firstname = localStorage.getItem("firstname")
 
-  console.log(dispatch(getProfile({Jwt})))
+  
 
 
   return (
@@ -49,7 +48,7 @@ function ProfilePage() {
       </nav>
       <main className="main bg-dark">
         <div className="header">
-          <h1>Welcome back<br />{firstname}</h1>
+          <h1>Welcome back<br /> {store.getState().user.firstName}</h1>
           <button className="edit-button">Edit Name</button>
         </div>
         <h2 className="sr-only">Accounts</h2>
