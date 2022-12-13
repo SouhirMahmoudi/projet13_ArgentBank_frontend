@@ -2,29 +2,48 @@ import React from "react";
 import styled from "styled-components";
 import Header1 from "../Components/Header1";
 import Footer from "../Components/Footer";
-import {Link} from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { signInUser } from "../features/authSlice";
+import store from "../features/Store";
+import { useNavigate } from "react-router-dom";
 
-function LoginPage(){
+function LoginPage (){
+ const [email, setemail]= useState("");
+ const [password, setpassword]= useState("");
+ const dispatch = useDispatch();
+ const navigate = useNavigate()
+ const handlelogin = async(event) => {
+  event.preventDefault();
+      dispatch(signInUser({email, password}))
+      console.log(store.getState().user.logedIn)
+     if(store.getState().user.logedIn === true){
+      
+    navigate('/profile');
+    
+     }    
+ }
 
+ 
     return (
    <LoginP>
    <Header1/>
    <MainBgDark>
       <SignInContent>
-        <i class="fa fa-user-circle sign-in-icon"></i>
+        <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         <form>
           <InputWrapper>
-            <label for="username">Username</label><input type="text" id="username" />
+            <label htmlFor="username">Username</label><input type="text" id="username" value={email} onChange={(e) => setemail(e.target.value)}/>
             </InputWrapper>
-          <div class="input-wrapper">
-            <label for="password">Password</label><input type="password" id="password" />
+          <div className="input-wrapper">
+            <label htmlFor="password">Password</label><input type="password" id="password" value={password} onChange={(e) => setpassword(e.target.value)} />
           </div>
-          <div class="input-remember">
-            <input type="checkbox" id="remember-me" /><label for="remember-me">Remember me</label>
+          <div className="input-remember">
+            <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
           </div>
          
-          <Link to="/profile"> <button class="sign-in-button">Sign In</button> </Link>
+           <button className="sign-in-button" onClick={handlelogin}>Sign In</button>
         
         </form>
         </SignInContent>
@@ -34,13 +53,13 @@ function LoginPage(){
     )
 }
 
-const LoginP = styled.body`
+const LoginP = styled.main`
 
 `
-const MainBgDark = styled.body`
+const MainBgDark = styled.section`
 
 `
-const SignInContent = styled.section`
+const SignInContent = styled.div`
 
 `
 const InputWrapper = styled.div``

@@ -9,14 +9,14 @@ function Header1() {
 
     return (
         <HeadMain>
-            <logS>
+           
                 <NavLink to="/">
                     <img src={logo} alt="Argent Bank Logo" />
                     <h1>Argent Bank</h1>
                 </NavLink>
-            </logS>
+        
 
-            <SignIn> <NavLink to="/login"> <i class="fa fa-user-circle"></i>Sign In</NavLink></SignIn>
+            <SignIn> <NavLink to="/login"> <i className="fa fa-user-circle"></i>Sign In</NavLink></SignIn>
 
         </HeadMain>
 
@@ -28,10 +28,8 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 5px 20px;
- `
-
-const logS = styled.div`
-display: flex;
+Navlink{
+  display: flex;
   align-items: center;
   font-weight: bold;
   color: #2c3e50;
@@ -43,6 +41,9 @@ display: flex;
     width: 200px;
 
   }
+
+}
+
 
   h1{
     border: 0 !important;
