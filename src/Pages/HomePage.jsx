@@ -64,13 +64,13 @@ function HomePage() {
     )
 }
 
-const Body = styled.body`
+const Body = styled.main`
   margin: 0;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 `
-const Main = styled.main `
+const Main = styled.div `
 flex: 1;
 
 `

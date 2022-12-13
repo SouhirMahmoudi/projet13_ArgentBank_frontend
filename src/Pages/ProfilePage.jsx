@@ -1,26 +1,33 @@
 import React from "react";
 import store from "../features/Store";
 import { useDispatch } from "react-redux";
-import { getProfile } from "../features/authSlice";
-//import { useState } from "react";
+import { getProfile, logout } from "../features/authSlice";
+import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
 
 
 
 function ProfilePage() {
  const dispatch = useDispatch();
  const Jwt = localStorage.getItem("token");
- // const [firstname, setfirstname] = useState("");
+ //const [firstname, setfirstname] = useState("");
  // const [lastname, setlastname] = useState("");
-
+ const navigate = useNavigate()
+ //const firstname = useRef(store.getState().user.firstName)
  useEffect(() => {
-  dispatch(getProfile({Jwt}))
-  
-     // setlastname(data.lastname)
-   },[dispatch, Jwt])
+  dispatch(getProfile({Jwt}));
+   }, [dispatch, Jwt])
    
- //   const firstname = localStorage.getItem("firstname")
+  
 
+  const Signout =()=>{
+    console.log(store.getState().user)
+    dispatch(logout(store.getState().user))
+    navigate('/');
+    console.log(store.getState().user)
+  }
   
 
 
@@ -38,12 +45,12 @@ function ProfilePage() {
         <div>
           <a className="main-nav-item" href="./user.html">
             <i className="fa fa-user-circle"></i>
-            Tony
+            {store.getState().user.firstName}
           </a>
-          <a className="main-nav-item" href="./index.html">
+          <button onClick={Signout}>
             <i className="fa fa-sign-out"></i>
             Sign Out
-          </a>
+          </button>
         </div>
       </nav>
       <main className="main bg-dark">

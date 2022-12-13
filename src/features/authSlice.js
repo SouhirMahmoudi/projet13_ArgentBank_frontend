@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { json } from 'react-router-dom'
+
 
 
 const initialState = {
@@ -45,7 +45,8 @@ const authSlice = createSlice({
     reducers: {
         
         logout: (state, action) => {
-            state.token = null
+            state.token = ""
+            state.firstName=""
             localStorage.clear()
         }
     },
