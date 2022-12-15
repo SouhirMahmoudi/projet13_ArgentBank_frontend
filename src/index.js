@@ -9,6 +9,8 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from '../src/Pages/LoginPage';
 import store from "../src/features/Store"
 import ProfilePage from './Pages/ProfilePage';
+import EditProfilePage from './Pages/EditProfilePage';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,6 +21,7 @@ root.render(
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
         <Route path="/profile" element={<ProfilePage/>} />
+        <Route path="/editProfilePage" element={<EditProfilePage/>}/>
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
     </BrowserRouter>

@@ -1,63 +1,72 @@
 import React from "react";
 import store from "../features/Store";
-import { useDispatch } from "react-redux";
-import { getProfile, logout } from "../features/authSlice";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {getProfile, logout } from "../features/authSlice";
+//import { useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
-
+import { NavLink } from "react-router-dom"
+import logo from "../Assets/argentBankLogo.png"
+//import { useRef } from "react";
+import Footer from "../Components/Footer"
+import styled from "styled-components";
 
 
 function ProfilePage() {
- const dispatch = useDispatch();
- const Jwt = localStorage.getItem("token");
- //const [firstname, setfirstname] = useState("");
- // const [lastname, setlastname] = useState("");
- const navigate = useNavigate()
- //const firstname = useRef(store.getState().user.firstName)
- useEffect(() => {
-  dispatch(getProfile({Jwt}));
-   }, [dispatch, Jwt])
-   
-  
+  const dispatch = useDispatch();
+  const Jwt = localStorage.getItem("token");
 
-  const Signout =()=>{
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(getProfile({ Jwt }));
+  })
+
+  let firstname = useSelector(state => state.user.firstName)
+  console.log(firstname)
+  const Signout = () => {
     console.log(store.getState().user)
     dispatch(logout(store.getState().user))
     navigate('/');
     console.log(store.getState().user)
   }
-  
+ 
+ /* const EditName=()=>async(event) => {
+    event.preventDefault();
+    navigate('/editProfilePage')}*/
+
+ /*const EditName=()=>{async(event) => {
+  event.preventDefault();
+  dispatch(EditUserInfos(Jwt, firstnameInput, lastnameInput))
+
+ }}*/
+
+
 
 
   return (
-    <main>
-      <nav className="main-nav">
-        <a className="main-nav-logo" href="./index.html">
-          <img
-            className="main-nav-logo-image"
-            src="./img/argentBankLogo.png"
-            alt="Argent Bank Logo"
-          />
-          <h1 className="sr-only">Argent Bank</h1>
-        </a>
-        <div>
-          <a className="main-nav-item" href="./user.html">
+    <MainG>
+        <Mainnavlogo>
+          <NavLink to="/">
+            <img src={logo} alt="Argent Bank Logo" />
+          </NavLink>
+          <div>
+          <MainNavtem>
             <i className="fa fa-user-circle"></i>
-            {store.getState().user.firstName}
-          </a>
-          <button onClick={Signout}>
+            <p > {firstname}</p>
+          </MainNavtem>
+          <MainNavtem><button onClick={Signout}>
             <i className="fa fa-sign-out"></i>
             Sign Out
-          </button>
-        </div>
-      </nav>
-      <main className="main bg-dark">
-        <div className="header">
-          <h1>Welcome back<br /> {store.getState().user.firstName}</h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
+          </button></MainNavtem>
+          </div>
+        </Mainnavlogo>
+      
+      <MainbgDark>
+        <Header>
+          <h1>Welcome back {firstname}</h1>
+       <NavLink to="/editProfilePage" >  <button className="edit-button" >Edit Name</button></NavLink>
+        </Header>
         <h2 className="sr-only">Accounts</h2>
         <section className="account">
           <div className="account-content-wrapper">
@@ -89,13 +98,33 @@ function ProfilePage() {
             <button className="transaction-button">View transactions</button>
           </div>
         </section>
-      </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
-    </main>
+      </MainbgDark>
+      <Footer />
+    </MainG>
   )
 }
 
-
+const Mainnavlogo = styled.div`
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 5px 20px; 
+img{
+    max-width: 100%;
+    width: 200px;
+  }
+  Navlink{
+    display: flex;
+    align-items: center;
+  }
+  `
+  const MainbgDark = styled.div ``
+const MainNavtem = styled.div`
+text-decoration: none;
+margin-right: 0.5rem;
+font-weight: bold;
+color: #2c3e50;
+`
+const MainG= styled.main``
+const Header = styled.header ``
 export default ProfilePage;

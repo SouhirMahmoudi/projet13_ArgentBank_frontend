@@ -15,38 +15,53 @@ const initialState = {
 
 export const signInUser = createAsyncThunk('signinuser', async (body) => {
     const response = await fetch("http://localhost:3001/api/v1/user/login", {
-        method: "post",
+        method: "POST",
         headers: {
             'content-type': "application/json",
         },
 
         body: JSON.stringify(body)
     })
-    console.log(body)
+    
     return await response.json();
 
 })
 export const getProfile = createAsyncThunk('getprofile', async (payload) => {
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
-        method: "post",
+        method: "POST",
         headers: {
             Authorization: `Bearer ${payload.Jwt}`
         },
     })
-   console.log(payload.Jwt)
+   console.log(response)
     return await response.json();
 
 })
+export const EditUserInfos = createAsyncThunk('edituserinfos', async (payload) => {
+    const response = await fetch("http://localhost:3001/api/v1/user/profile", {
+        method: "PUT",
+        headers: {
+            Authorization: `Bearer ${payload.Jwt}`,
+           'Content-Type':'application/json',
+        },
+        body: JSON.stringify({firstName :payload.UserInfos.firstname, lastName: payload.UserInfos.lastname})
+    })
+   console.log(payload)
+    return await response.json();
 
+})
 
 const authSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        
+
+    
         logout: (state, action) => {
             state.token = ""
             state.firstName=""
+            state.lastName=""
+            state.logedIn= false;
             localStorage.clear()
         }
     },
@@ -64,9 +79,8 @@ const authSlice = createSlice({
 
             }
             else {
-                console.log(body.token, typeof(body.token))
-                state.token = body.token;
                 state.logedIn = true;
+                state.token = body.token;
                 localStorage.setItem('token', body.token)
                 
             }
@@ -76,7 +90,7 @@ const authSlice = createSlice({
         [signInUser.rejected]: (state, action) => {
             state.loading = true
         },
- /*******************Sign in**********************/
+ /*******************getProfil**********************/
  [getProfile.pending]: (state, action) => {
     state.loading = true
 },
@@ -88,9 +102,10 @@ const authSlice = createSlice({
 
     }
     else {
-        console.log(body)
+       console.log(body)
+        state.logedIn = true;
         state.firstName = body.firstName;
-        //state.lastName = lastName;
+        state.lastName = body.lastName;
      
     }
 
@@ -99,6 +114,31 @@ const authSlice = createSlice({
 [getProfile.rejected]: (state, action) => {
     state.loading = true
 },
+
+
+ /******************EditUserInfos**********************/
+ [EditUserInfos.pending]: (state, action) => {
+    state.loading = true
+},
+[EditUserInfos.fulfilled]: (state, { payload: { error, body} }) => {
+    state.loading = false;
+   
+    if (error) {
+        state.error = error;
+        console.log(error)
+
+    }
+    else {
+        state.firstName = body.firstName;
+        state.lastName = body.lastName;
+        state.logedIn = true;
+        
+    }
+   
+},
+[EditUserInfos.rejected]: (state, action) => {
+    state.loading = true
+}
     }
 
 }
