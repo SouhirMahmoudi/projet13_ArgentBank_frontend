@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom"
 import logo from "../Assets/argentBankLogo.png"
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 function Header1() {
@@ -16,7 +18,7 @@ function Header1() {
                 </NavLink>
         
 
-            <SignIn> <NavLink to="/login"> <i className="fa fa-user-circle"></i>Sign In</NavLink></SignIn>
+            <SignIn> <NavLink to="/login"> <FontAwesomeIcon icon={faUserCircle} color="#2c3e50" />  Sign In</NavLink></SignIn>
 
         </HeadMain>
 
@@ -61,6 +63,7 @@ Navlink{
   `
 
 const SignIn = styled.div`
+a{
 text-decoration: none;
 margin-right: 0.5rem;
 font-weight: bold;
@@ -71,6 +74,7 @@ font-weight: bold;
 
 :hover {
  text-decoration: underline;
+}
 }
  `
 

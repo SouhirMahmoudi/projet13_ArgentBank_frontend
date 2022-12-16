@@ -10,6 +10,7 @@ import LoginPage from '../src/Pages/LoginPage';
 import store from "../src/features/Store"
 import ProfilePage from './Pages/ProfilePage';
 import EditProfilePage from './Pages/EditProfilePage';
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

@@ -5,6 +5,8 @@ import Footer from "../Components/Footer";
 import iconChat from "../Assets/icon-chat.png"
 import iconMoney from "../Assets/icon-money.png"
 import iconSecurity from "../Assets/icon-security.png"
+import bankTree from "../Assets/bank-tree.jpeg"
+
 
 function HomePage() {
 
@@ -75,7 +77,7 @@ flex: 1;
 
 `
 const Hero = styled.div `
-background-image: url('../Assets/bank-tree.jpeg');
+background-image: url(${bankTree});
 background-position: 0 -50px;
 background-size: cover;
 background-repeat: no-repeat;
