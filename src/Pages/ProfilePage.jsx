@@ -26,6 +26,7 @@ function ProfilePage() {
   })
 
   let firstname = useSelector(state => state.user.firstName)
+  let lastname= useSelector(state => state.user.lastName)
   console.log(firstname)
   const Signout = () => {
     console.log(store.getState().user)
@@ -57,7 +58,7 @@ function ProfilePage() {
 
       <MainbgDark>
         <Header>
-          <h1>Welcome back {firstname}</h1>
+          <h1>Welcome back <br></br> {firstname} {lastname}!</h1>
           <NavLink to="/editProfilePage" >  <EditButton>Edit Name</EditButton></NavLink>
         </Header>
         <SrOnly>Accounts</SrOnly>
