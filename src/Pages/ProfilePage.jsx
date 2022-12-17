@@ -127,6 +127,7 @@ color: #2c3e50;
 `
 
 const Btn  = styled.a`
+cursor:pointer;
 `
 const MainG = styled.main`
 flex: 1;`

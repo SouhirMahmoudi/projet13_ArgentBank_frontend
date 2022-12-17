@@ -105,8 +105,8 @@ margin: 0 auto;
       right: 50px;
       width: 300px;
       margin: 2rem;
-
 }
+
 
 `
 const SrOnly = styled.h2 `
