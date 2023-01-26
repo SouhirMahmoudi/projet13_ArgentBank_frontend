@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HomePage from "../src/Pages/HomePage"
 import ErrorPage from "../src/Pages/ErrorPage"
@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
   <React.StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<HomePage/>} />
         <Route path="/login" element={<LoginPage/>} />
@@ -25,7 +25,7 @@ root.render(
         <Route path="/editProfilePage" element={<EditProfilePage/>}/>
         <Route path="*" element={<ErrorPage/>} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>
   </Provider>
 );

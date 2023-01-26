@@ -29,10 +29,10 @@ function ProfilePage() {
   let lastname= useSelector(state => state.user.lastName)
   console.log(firstname)
   const Signout = () => {
-    console.log(store.getState().user)
+   // console.log(store.getState().user)
     dispatch(logout(store.getState().user))
     navigate('/');
-    console.log(store.getState().user)
+   // console.log(store.getState().user)
   }
 
 

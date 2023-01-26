@@ -69,10 +69,12 @@ function LoginPage() {
           </Sign>
           <form>
             <InputWrapper>
-              <label htmlFor="username">Username</label><input type="text" id="username" value={email} onChange={(e) => setemail(e.target.value)} />
+              <label htmlFor="username">Username</label>
+              <input type="text" id="username" value={email} onChange={(e) => setemail(e.target.value)} />
             </InputWrapper>
             <InputWrapper>
-              <label htmlFor="password">Password</label><input type="password" id="password" value={password} onChange={(e) => setpassword(e.target.value)} />
+              <label htmlFor="password">Password</label>
+              <input type="password" id="password" value={password} onChange={(e) => setpassword(e.target.value)} />
               </InputWrapper>
             <InputRemember>
               <input type="checkbox" id="remember-me"
